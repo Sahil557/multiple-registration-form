@@ -3,8 +3,11 @@ import {
   InputField,
   Button,
 } from "../common";
+interface BankDetailsProps {
+  onPrevious: () => void;
+}
 
-const BankDetails: React.FC = () => {
+const BankDetails: React.FC<BankDetailsProps> = ({ onPrevious }) => {
     return(
       <form>
       <div className="flex flex-wrap">
@@ -55,7 +58,7 @@ const BankDetails: React.FC = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <Button className="mr-4" children="Preview" type="submit" />
+        <Button className="mr-4" onClick={onPrevious} children="Preview" type="submit" />
         <Button children="Submit" type="submit" />
       </div>
     </form>

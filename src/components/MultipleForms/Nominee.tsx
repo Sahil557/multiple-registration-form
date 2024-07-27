@@ -1,9 +1,20 @@
 import React from "react";
 import { InputField, Button, DatePicker, Dropdown } from "../common";
 
-const Nominee: React.FC = () => {
+  interface NomineeProps {
+    onNext: () => void;
+    onPrevious: () => void;
+  }
+  
+  
+  const Nominee: React.FC<NomineeProps> = ({ onNext, onPrevious }) => {
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      // Add validation if necessary
+      onNext();
+    };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h2 className="ms-3 mb-5">Nominee 1</h2>
       <div className="flex flex-wrap">
         <div className="w-full md:w-1/2 px-3 md:mb-0">
@@ -113,7 +124,7 @@ const Nominee: React.FC = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <Button className="mr-4" children="Preview" type="submit" />
+        <Button className="mr-4" onClick={onPrevious} children="Preview" type="button" />
         <Button children="Next" type="submit" />
       </div>
     </form>

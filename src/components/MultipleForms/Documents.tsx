@@ -1,9 +1,18 @@
 import React from "react";
 import { InputField, Button, FileUpload } from "../common";
+interface DocumentsProps {
+  onNext: () => void;
+  onPrevious: () => void;
+}
 
-const Documents: React.FC = () => {
+const Documents: React.FC<DocumentsProps> = ({ onNext, onPrevious }) => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Add validation if necessary
+    onNext();
+  };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="flex flex-wrap">
         <div className="w-full md:w-1/2 px-3 md:mb-0">
           <InputField
@@ -89,7 +98,7 @@ const Documents: React.FC = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <Button className="mr-4" children="Preview" type="submit" />
+        <Button className="mr-4" onClick={onPrevious} children="Preview" type="button" />
         <Button children="Next" type="submit" />
       </div>
     </form>

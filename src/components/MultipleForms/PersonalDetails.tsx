@@ -7,9 +7,20 @@ import {
   ImagePicker,
 } from "../common";
 
-const PersonalDetails: React.FC = () => {
+
+interface PersonalDetailsProps {
+  onNext: () => void;
+}
+
+const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here, you can add validation to check if all fields are filled.
+    // If validation passes, call onNext
+    onNext();
+  };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
         <div className="flex md:mb-4 xl:mb-4 flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
           <ImagePicker label="Choose profile photo" />

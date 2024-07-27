@@ -1,9 +1,20 @@
 import React from "react";
 import { InputField, Button, DatePicker, Dropdown } from "../common";
 
-const References: React.FC = () => {
+interface RefrencesProps {
+  onNext: () => void;
+  onPrevious: () => void;
+}
+
+
+const References: React.FC<RefrencesProps> = ({ onNext, onPrevious }) => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Add validation if necessary
+    onNext();
+  };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h3 className="ms-3 mb-5">Reference 1</h3>
       <div className="flex flex-wrap">
         <div className="w-full md:w-1/2 px-3 md:mb-0">
@@ -70,7 +81,7 @@ const References: React.FC = () => {
         <InputField id="pin" type="number" placeholder="PIN" required />
       </div>
       <div className="flex justify-center">
-        <Button className="mr-4" children="Preview" type="submit" />
+        <Button className="mr-4" onClick={onPrevious} children="Preview" type="button" />
         <Button children="Next" type="submit" />
       </div>
     </form>

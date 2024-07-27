@@ -26,7 +26,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
               <a
                 onClick={() => setActiveTab(tab.id)}
                 className={`z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit ${
-                  activeTab === tab.id ? "bg-blue-500 text-white" : ""
+                  activeTab === tab.id ? "text-white bg-blue-600" : ""
                 }`}
                 data-tab-target={tab.id}
                 role="tab"

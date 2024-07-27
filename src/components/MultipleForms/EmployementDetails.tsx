@@ -7,9 +7,19 @@ import {
   DatePicker,
 } from "../common";
 
-const EmployementDetails: React.FC = () => {
+interface EmployementDetailsProps {
+  onNext: () => void;
+  onPrevious: () => void;
+}
+
+const EmployementDetails: React.FC<EmployementDetailsProps> = ({ onNext, onPrevious }) => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Add validation if necessary
+    onNext();
+  };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="flex flex-wrap">
         <div className="w-full md:w-1/2 px-3 md:mb-0">
           <Dropdown
@@ -67,7 +77,7 @@ const EmployementDetails: React.FC = () => {
         <FileUpload label="Salary Slip" />
       </div>
       <div className="flex justify-center">
-        <Button className="mr-4" children="Preview" type="submit" />
+        <Button className="mr-4" onClick={onPrevious} children="Preview" type="button" />
         <Button children="Next" type="submit" />
       </div>
     </form>
