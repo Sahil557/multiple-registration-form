@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import PersonalDetails from "./components/MultipleForms/PersonalDetails";
-import Documents from "./components/MultipleForms/Documents";
-import EmploymentDetails from "./components/MultipleForms/EmployementDetails";
-import References from "./components/MultipleForms/References";
-import Nominee from "./components/MultipleForms/Nominee";
-import BankDetails from "./components/MultipleForms/BankDetails";
-import axios from 'axios';
+import axios from "axios";
+import {
+  PersonalDetails,
+  Documents,
+  EmploymentDetails,
+  References,
+  Nominee,
+  BankDetails,
+} from "./components/MultipleForms/index";
 
 const tabs = [
   {
@@ -120,12 +122,16 @@ const App: React.FC = () => {
 
   const handleSubmit = async (formData: any) => {
     try {
-      const response = await axios.post("https://loanmanagementsystem-nrfq.onrender.com/api/v1/customer/register", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
+      const response = await axios.post(
+        "https://loanmanagementsystem-nrfq.onrender.com/api/v1/customer/register",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       console.log("Success:", response.data);
       alert("Form submitted successfully!");
     } catch (error) {
@@ -210,6 +216,6 @@ const App: React.FC = () => {
       </main>
     </div>
   );
-}
+};
 
 export default App;
