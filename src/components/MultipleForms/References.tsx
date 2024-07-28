@@ -112,9 +112,7 @@ const References: React.FC<ReferencesProps> = ({ onNext, onPrevious }) => {
                 label="Mobile Number"
                 placeholder="3621xxxx"
                 value={witness.phoneNo}
-                onChange={(e) =>
-                  handleChange(index, "phoneNo", e.target.value)
-                }
+                onChange={(e) => handleChange(index, "phoneNo", e.target.value)}
                 required
               />
             </div>
@@ -127,9 +125,7 @@ const References: React.FC<ReferencesProps> = ({ onNext, onPrevious }) => {
                 label="Current Address"
                 placeholder="Street"
                 value={witness.currentAddress.street}
-                onChange={(e) =>
-                  handleChange(index, "street", e.target.value)
-                }
+                onChange={(e) => handleChange(index, "street", e.target.value)}
                 required
               />
             </div>
@@ -160,9 +156,7 @@ const References: React.FC<ReferencesProps> = ({ onNext, onPrevious }) => {
               type="text"
               placeholder="District"
               value={witness.currentAddress.district}
-              onChange={(e) =>
-                handleChange(index, "district", e.target.value)
-              }
+              onChange={(e) => handleChange(index, "district", e.target.value)}
               required
             />
             <InputField

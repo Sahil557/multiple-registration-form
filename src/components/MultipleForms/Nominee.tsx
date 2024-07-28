@@ -49,7 +49,9 @@ const Nominee: React.FC<NomineeProps> = ({ onNext, onPrevious }) => {
                 type="text"
                 required
                 value={nominee.fullName}
-                onChange={(e) => handleChange(index, "fullName", e.target.value)}
+                onChange={(e) =>
+                  handleChange(index, "fullName", e.target.value)
+                }
               />
             </div>
             <div className="w-full md:w-1/2 px-3 md:mb-0">
@@ -71,9 +73,7 @@ const Nominee: React.FC<NomineeProps> = ({ onNext, onPrevious }) => {
               <DatePicker
                 label="Date of Birth"
                 value={nominee.dob}
-                onChange={(date) =>
-                  handleChange(index, "dob", date.toString())
-                }
+                onChange={(date) => handleChange(index, "dob", date.toString())}
               />
             </div>
             <div className="w-full md:w-1/2 px-3 md:mb-0">

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import {
   PersonalDetails,
   Documents,
@@ -8,6 +7,7 @@ import {
   Nominee,
   BankDetails,
 } from "./components/MultipleForms/index";
+import registerCustomer from "./Services/registerCustomer";
 
 const tabs = [
   {
@@ -45,17 +45,19 @@ const App: React.FC = () => {
     bankDetailsData: {},
   });
 
-  const [tabCompletion, setTabCompletion] = useState<Record<TabId, boolean>>({
-    PersonalDetails: false,
-    Documents: false,
-    EmploymentDetails: false,
-    References: false,
-    Nominee: false,
-    BankDetails: false,
+  const [tabCompletion, setTabCompletion] = useState<
+    Record<TabId, { completed: boolean; disabled: boolean }>
+  >({
+    PersonalDetails: { completed: false, disabled: false },
+    Documents: { completed: false, disabled: true },
+    EmploymentDetails: { completed: false, disabled: true },
+    References: { completed: false, disabled: true },
+    Nominee: { completed: false, disabled: true },
+    BankDetails: { completed: false, disabled: true },
   });
 
-  const handleNext = (currentTab: string, newData: any) => {
-    let nextTab = "";
+  const handleNext = (currentTab: TabId, newData: any) => {
+    let nextTab: TabId | null = null;
 
     if (currentTab === "PersonalDetails") {
       setFormData((prevState) => ({
@@ -98,7 +100,8 @@ const App: React.FC = () => {
 
     setTabCompletion((prev) => ({
       ...prev,
-      [currentTab]: true,
+      [currentTab]: { completed: true, disabled: true },
+      [nextTab as TabId]: { ...prev[nextTab as TabId], disabled: false },
     }));
 
     if (nextTab) {
@@ -106,7 +109,7 @@ const App: React.FC = () => {
     }
   };
 
-  const handlePrevious = (currentTab: string) => {
+  const handlePrevious = (currentTab: TabId) => {
     if (currentTab === "Documents") {
       setActiveTab("PersonalDetails");
     } else if (currentTab === "EmploymentDetails") {
@@ -122,20 +125,10 @@ const App: React.FC = () => {
 
   const handleSubmit = async (formData: any) => {
     try {
-      const response = await axios.post(
-        "https://loanmanagementsystem-nrfq.onrender.com/api/v1/customer/register",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      console.log("Success:", response.data);
+      const response = await registerCustomer(formData);
+      console.log("Success:", response);
       alert("Form submitted successfully!");
     } catch (error) {
-      console.error("Error:", error);
       alert("There was an error submitting the form. Please try again.");
     }
   };
@@ -164,15 +157,18 @@ const App: React.FC = () => {
                   <a
                     onClick={() => {
                       if (
-                        tab.id === "PersonalDetails" ||
-                        (tab.id === "Documents" &&
-                          tabCompletion.PersonalDetails) ||
-                        (tab.id === "EmploymentDetails" &&
-                          tabCompletion.Documents) ||
-                        (tab.id === "References" &&
-                          tabCompletion.EmploymentDetails) ||
-                        (tab.id === "Nominee" && tabCompletion.References) ||
-                        (tab.id === "BankDetails" && tabCompletion.Nominee)
+                        !tabCompletion[tab.id as TabId].disabled &&
+                        (tab.id === "PersonalDetails" ||
+                          (tab.id === "Documents" &&
+                            tabCompletion.PersonalDetails.completed) ||
+                          (tab.id === "EmploymentDetails" &&
+                            tabCompletion.Documents.completed) ||
+                          (tab.id === "References" &&
+                            tabCompletion.EmploymentDetails.completed) ||
+                          (tab.id === "Nominee" &&
+                            tabCompletion.References.completed) ||
+                          (tab.id === "BankDetails" &&
+                            tabCompletion.Nominee.completed))
                       ) {
                         setActiveTab(tab.id);
                       }
@@ -180,10 +176,7 @@ const App: React.FC = () => {
                     className={`z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit ${
                       activeTab === tab.id ? "text-white bg-blue-600" : ""
                     } ${
-                      !(
-                        tab.id === "PersonalDetails" ||
-                        tabCompletion[tab.id as TabId]
-                      )
+                      tabCompletion[tab.id as TabId].disabled
                         ? "cursor-not-allowed opacity-50"
                         : ""
                     }`}
@@ -207,8 +200,8 @@ const App: React.FC = () => {
               className={`tab-content ${activeTab === tab.id ? "" : "hidden"}`}
             >
               <Component
-                onNext={(data: any) => handleNext(tab.id, data)}
-                onPrevious={() => handlePrevious(tab.id)}
+                onNext={(data: any) => handleNext(tab.id as TabId, data)}
+                onPrevious={() => handlePrevious(tab.id as TabId)}
               />
             </div>
           );

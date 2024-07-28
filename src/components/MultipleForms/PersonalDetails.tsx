@@ -117,7 +117,6 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
       [id]: file,
     }));
   };
-  
 
   return (
     <form onSubmit={handleSubmit}>

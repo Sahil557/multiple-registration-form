@@ -12,7 +12,10 @@ interface EmploymentDetailsProps {
   onPrevious: () => void;
 }
 
-const EmploymentDetails: React.FC<EmploymentDetailsProps> = ({ onNext, onPrevious }) => {
+const EmploymentDetails: React.FC<EmploymentDetailsProps> = ({
+  onNext,
+  onPrevious,
+}) => {
   const [employmentData, setEmploymentData] = useState({
     type: "",
     organizationName: "",
@@ -23,7 +26,10 @@ const EmploymentDetails: React.FC<EmploymentDetailsProps> = ({ onNext, onPreviou
     salarySlip: null as File | null,
   });
 
-  const handleInputChange = (id: keyof typeof employmentData, value: string | number) => {
+  const handleInputChange = (
+    id: keyof typeof employmentData,
+    value: string | number
+  ) => {
     setEmploymentData((prevState) => ({
       ...prevState,
       [id]: value,
@@ -67,7 +73,9 @@ const EmploymentDetails: React.FC<EmploymentDetailsProps> = ({ onNext, onPreviou
             type="text"
             required
             value={employmentData.organizationName}
-            onChange={(e) => handleInputChange("organizationName", e.target.value)}
+            onChange={(e) =>
+              handleInputChange("organizationName", e.target.value)
+            }
           />
         </div>
       </div>
@@ -111,18 +119,22 @@ const EmploymentDetails: React.FC<EmploymentDetailsProps> = ({ onNext, onPreviou
             type="number"
             required
             value={employmentData.currentOrLastAnnualSalary}
-            onChange={(e) => handleInputChange("currentOrLastAnnualSalary", e.target.value)}
+            onChange={(e) =>
+              handleInputChange("currentOrLastAnnualSalary", e.target.value)
+            }
           />
         </div>
       </div>
       <div className="flex flex-wrap px-3 mb-6">
-        <FileUpload
-          label="Salary Slip"
-          onChange={handleFileChange}
-        />
+        <FileUpload label="Salary Slip" onChange={handleFileChange} />
       </div>
       <div className="flex justify-center">
-        <Button className="mr-4" onClick={onPrevious} children="Preview" type="submit" />
+        <Button
+          className="mr-4"
+          onClick={onPrevious}
+          children="Preview"
+          type="submit"
+        />
         <Button children="Next" type="submit" />
       </div>
     </form>

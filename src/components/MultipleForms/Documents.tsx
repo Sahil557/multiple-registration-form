@@ -32,7 +32,10 @@ const Documents: React.FC<DocumentsProps> = ({ onNext, onPrevious }) => {
     }));
   };
 
-  const handleFileChange = (id: keyof typeof documentsData, file: File | null) => {
+  const handleFileChange = (
+    id: keyof typeof documentsData,
+    file: File | null
+  ) => {
     setDocumentsData((prevState) => ({
       ...prevState,
       [id]: {
@@ -55,23 +58,33 @@ const Documents: React.FC<DocumentsProps> = ({ onNext, onPrevious }) => {
             <InputField
               id={key}
               placeholder="Enter number"
-              label={`${key.replace(/([A-Z])/g, ' $1')} Number`}
+              label={`${key.replace(/([A-Z])/g, " $1")} Number`}
               type="text"
               required
               value={number}
-              onChange={(e) => handleInputChange(key as keyof typeof documentsData, e.target.value)}
+              onChange={(e) =>
+                handleInputChange(
+                  key as keyof typeof documentsData,
+                  e.target.value
+                )
+              }
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
             <FileUpload
-              label={`${key.replace(/([A-Z])/g, ' $1')} File`}
+              label={`${key.replace(/([A-Z])/g, " $1")} File`}
               onChange={(file) => {}}
             />
           </div>
         </div>
       ))}
       <div className="flex justify-center">
-        <Button className="mr-4"onClick={onPrevious} children="Preview" type="submit" />
+        <Button
+          className="mr-4"
+          onClick={onPrevious}
+          children="Preview"
+          type="submit"
+        />
         <Button children="Next" type="submit" />
       </div>
     </form>
