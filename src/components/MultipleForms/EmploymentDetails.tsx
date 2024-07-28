@@ -8,7 +8,7 @@ import {
 } from "../common";
 
 interface EmploymentDetailsProps {
-  onNext: (data: any) => void; // Adjusted type to accept data
+  onNext: (data: any) => void;
   onPrevious: () => void;
 }
 

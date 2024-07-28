@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { InputField, Button, FileUpload } from "../common";
 
-// Define the structure of documents data
 interface Document {
   number: string;
   file: File | null | string;
 }
 
 interface DocumentsProps {
-  onNext: (data: { [key: string]: Document }) => void; // Adjusted type to match the structure
+  onNext: (data: { [key: string]: Document }) => void;
   onPrevious: () => void;
 }
 

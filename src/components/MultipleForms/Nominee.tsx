@@ -32,7 +32,7 @@ const Nominee: React.FC<NomineeProps> = ({ onNext, onPrevious }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onNext(nomineeData); // Directly pass nomineeData array
+    onNext(nomineeData);
   };
 
   return (

@@ -63,8 +63,6 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
     avatar: "pic.q",
   });
 
-  // (The rest of the code remains the same)
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onNext(formData);
@@ -72,12 +70,8 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ onNext }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-
-    // Split the id to handle nested state
     const [mainKey, nestedKey] = id.split(".") as [keyof FormData, string?];
-
     if (nestedKey) {
-      // Ensure mainKey exists and is of type Address
       if (mainKey === "currentAddress" || mainKey === "permanentAddress") {
         setFormData((prevState) => ({
           ...prevState,

@@ -5,7 +5,7 @@ const ImagePicker: React.FC<ImagePickerProps> = ({ label, id, onChange }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && onChange) {
-      onChange(file); // Pass the File object
+      onChange(file);
     }
   };
 
