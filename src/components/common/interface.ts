@@ -8,18 +8,24 @@ export interface ButtonProps {
 
 // Interface for DatePicker component props
 export interface DatePickerProps {
+  id?: string;
   label: string;
+  value?: string;
+  onChange?: (value: string) => void | any;
 }
 
 // Interface for ImagePicker component props
 export interface ImagePickerProps {
+  id: string;
   label: string;
+  onChange?: (file: File) => void;
 }
 
 // Interface for InputField component props
 export interface InputFieldProps {
   id: string;
   type: string;
+  value?: string | null | any;
   label?: string;
   placeholder: string;
   required?: boolean;
@@ -32,7 +38,8 @@ export interface DropdownProps {
   label: string;
   required?: boolean;
   options: string[];
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
 // Interface for Snackbar component props
@@ -46,4 +53,5 @@ export interface SnackbarProps {
 // Interface for FileUpload component props
 export interface FileUploadProps {
   label: string;
+  onChange?: (file: File | null) => void;
 }

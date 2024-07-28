@@ -1,3 +1,4 @@
+import React from "react";
 import { DropdownProps } from "./interface";
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -5,8 +6,15 @@ const Dropdown: React.FC<DropdownProps> = ({
   label,
   required,
   options,
+  value,
   onChange,
 }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    if (onChange) {
+      onChange(event.target.value);
+    }
+  };
+
   return (
     <div className="mb-6">
       <label
@@ -17,8 +25,9 @@ const Dropdown: React.FC<DropdownProps> = ({
       </label>
       <select
         id={id}
+        value={value}
         required={required}
-        onChange={onChange}
+        onChange={handleChange} // Use the new handler
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       >
         <option value="">Select an option</option>
