@@ -173,12 +173,11 @@ const App: React.FC = () => {
                         setActiveTab(tab.id);
                       }
                     }}
-                    className={`z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit ${
-                      activeTab === tab.id ? "text-white bg-blue-600" : ""
+                    className={`z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg text-slate-700 ${
+                      activeTab === tab.id && "text-white bg-blue-600 cursor-pointer"
                     } ${
                       tabCompletion[tab.id as TabId].disabled
-                        ? "cursor-not-allowed opacity-50"
-                        : ""
+                        && "cursor-not-allowed opacity-50"
                     }`}
                     data-tab-target=""
                     role="tab"
